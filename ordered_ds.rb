@@ -1,6 +1,6 @@
 class PQ
 
-    def initialize(array = [], heapify = true, &is_unordered)
+    def initialize array = [], heapify = true, &is_unordered
         raise ArgumentError.new 'PQ init' unless array.class == Array &&
             (heapify == true || heapify == false) && block_given?
         @a, @z, @u = array, array.size, is_unordered

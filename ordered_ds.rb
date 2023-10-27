@@ -9,6 +9,10 @@ class PQ
         sink i while (i -= 1) >= 0
     end
 
+    def size = @z
+
+    def empty? = @z == 0
+
     def top = @z > 0 ? @a.first : nil
 
     def << x

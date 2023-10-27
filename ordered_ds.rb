@@ -37,7 +37,7 @@ class PQ
 
     def sink p
         while (c = p * 2 + 1) < @z
-            c += 1 if c.n < @z && @u.(@a[c], @a[c.n])
+            c += 1 if c + 1 < @z && @u.(@a[c], @a[c + 1])
             break unless @u.call @a[p], @a[c]
             @a[p], @a[c] = @a[c], @a[p]
             p = c

@@ -1,6 +1,6 @@
 #!/bin/ruby
 
-require './ordered_ds.rb'
+require './lib/ordered_ds.rb'
 
 B = 1e9.to_i
 a = 1e6.to_i.times.map { rand B }

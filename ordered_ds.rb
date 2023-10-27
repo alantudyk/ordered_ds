@@ -4,7 +4,9 @@ class PQ
         raise ArgumentError.new 'PQ init' unless array.class == Array &&
             (heapify == true || heapify == false) && block_given?
         @a, @z, @u = array, array.size, is_unordered
-        @z.times.reverse_each { sink _1 } if heapify
+        return if @a.empty? || !heapify
+        i = 1 << Math.log(@z, 2).floor
+        sink i while (i -= 1) >= 0
     end
 
     def top = @z > 0 ? @a.first : nil

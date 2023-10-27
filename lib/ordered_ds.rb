@@ -4,8 +4,8 @@ class PQ
         raise ArgumentError.new 'PQ init' unless array.class == Array &&
             (heapify == true || heapify == false) && block_given?
         @a, @z, @u = array, array.size, is_unordered
-        return if @a.empty? || !heapify
-        i = 1 << Math.log(@z, 2).floor
+        return unless heapify
+        i = @z / 2
         sink i while (i -= 1) >= 0
     end
 
@@ -19,7 +19,7 @@ class PQ
         @a[i = @z] = x
         @z += 1
         while i > 0
-            p = (i - (i[0] ^ 1)) / 2
+            p = (i - 1) / 2
             break unless @u.call @a[p], @a[i]
             @a[p], @a[i] = @a[i], @a[p]
             i = p

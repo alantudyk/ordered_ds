@@ -1,23 +1,23 @@
 class PQ
 
     def initialize array = [], heapify = true, &is_unordered
-        raise ArgumentError.new 'PQ init' unless array.class == Array &&
-            (heapify == true || heapify == false) && block_given?
-        @a, @z, @u = array, array.size, is_unordered
+        raise ArgumentError.new 'PQ init' unless
+            array.class == Array &&
+            (heapify == true || heapify == false) &&
+            block_given?
+        @a, @u = array, is_unordered
         return unless heapify
-        i = @z / 2
+        i = @a.size / 2
         sink i while (i -= 1) >= 0
     end
 
-    def size = @z
-
-    def empty? = @z == 0
-
-    def top = @z > 0 ? @a.first : nil
+    def size = @a.size
+    def empty? = @a.empty?
+    def top = @a.first
 
     def << x
-        @a[i = @z] = x
-        @z += 1
+        i = @a.size
+        @a << x
         while i > 0
             p = (i - 1) / 2
             break unless @u.call @a[p], @a[i]
@@ -27,17 +27,19 @@ class PQ
     end
 
     def pop
-        return nil unless r = top
-        @a[0] = @a[@z -= 1]
+        return @a.pop if @a.size < 2
+        t, @a[0] = @a.first, @a.pop
         sink 0
-        r
+        t
     end
 
     private
 
     def sink p
-        while (c = p * 2 + 1) < @z
-            c += 1 if c + 1 < @z && @u.(@a[c], @a[c + 1])
+        z = @a.size
+        while (c = p * 2 + 1) < z
+            r = c + 1
+            c = r if r < z && @u.(@a[c], @a[r])
             break unless @u.call @a[p], @a[c]
             @a[p], @a[c] = @a[c], @a[p]
             p = c

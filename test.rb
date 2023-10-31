@@ -2,6 +2,7 @@
 
 require './lib/ordered_ds.rb'
 
+srand 0
 B = 1e9.to_i
 a = 1e6.to_i.times.map { rand B }
 

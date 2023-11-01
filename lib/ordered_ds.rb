@@ -14,6 +14,13 @@ class PQ
     def size = @a.size
     def empty? = @a.empty?
     def top = @a.first
+    def push_pop(x) = !@a.empty? && @u.(x, @a.first) ? pop_push(x) : x
+
+    def pop_push x
+        t, @a[0], = @a.first, x
+        sink 0
+        t
+    end
 
     def << x
         i = @a.size
@@ -24,6 +31,7 @@ class PQ
             @a[p], @a[i] = @a[i], @a[p]
             i = p
         end
+        self
     end
 
     def pop
